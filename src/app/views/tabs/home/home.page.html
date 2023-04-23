@@ -1,10 +1,16 @@
-<ion-header collapse="condense" style="color:#3d3d3d">
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title size="large">Home</ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- TODO: Build reusable dto object for that ion-card -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Training</ion-card-title>

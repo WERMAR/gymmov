@@ -4,11 +4,13 @@
       <canvas id="myChart"></canvas>
     </ion-col>
   </ion-row>
-  <ion-row class="ion-justify-content-end">
-    <ion-col size="3">
-      <ion-button color="primary" style="border-radius: 50px;width:75px" (click)="onClick()">
-        <ion-icon name="arrow-forward-outline"></ion-icon>
-      </ion-button>
+  <ion-row class="ion-justify-content-end" style="height: 50px">
+    <ion-col size="2">
+      <ion-fab>
+        <ion-fab-button color="primary" (click)="onClick()">
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </ion-col>
   </ion-row>
 </ion-grid>
