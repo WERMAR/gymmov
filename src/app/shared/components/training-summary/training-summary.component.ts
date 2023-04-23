@@ -46,7 +46,7 @@ export class TrainingSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    const myChart = new Chart(
+    new Chart(
       // @ts-ignore
       document.getElementById('myChart'),
       this.config
