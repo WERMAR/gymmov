@@ -1,0 +1,38 @@
+<ion-content [fullscreen]="true">
+  <ion-card class="anmiation">
+    <img alt="Silhouette of mountains" src="assets/register.jpg"/>
+    <ion-card-header>
+      <ion-card-title>Registration</ion-card-title>
+      <ion-card-subtitle>You wanna change something - then let's do it now!</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size-sm="12" offset-sm="5" class="ion-text-center ion-no-padding">
+            <ion-item style="width: 100%">
+              <ion-input label="E-Mail" label-placement="floating"
+                         placeholder="max.mustermann@test.de" [(ngModel)]="email"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-sm="12" offset-sm="5" class="ion-text-center ion-no-padding">
+            <ion-item style="width: 100%">
+              <ion-input label="Password" type="password" label-placement="floating"
+                         placeholder="Your Password" [(ngModel)]="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size-sm="6" offset-sm="3" class="ion-text-center ion-padding">
+            <ion-button class="ion-margin-start" expand="block" (click)="onSignUp()">Register</ion-button>
+            <ion-button style="font-size: small" fill="clear" expand="block" (click)="onLogInClicked()">You have an
+              Account?
+              - Login now!
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

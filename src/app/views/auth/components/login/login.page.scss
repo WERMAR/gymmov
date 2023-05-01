@@ -1,0 +1,16 @@
+.anmiation {
+  position: relative;
+  animation: animation 3s;
+  animation-direction: normal;
+}
+
+@keyframes animation {
+  0% {
+    left: 0px;
+    top: 100px;
+  }
+  50% {
+    left: 0px;
+    top: 0px;
+  }
+}

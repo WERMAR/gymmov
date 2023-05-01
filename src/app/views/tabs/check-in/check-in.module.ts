@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { CheckInPageRoutingModule } from './check-in-routing.module';
 
-import { CheckInPage } from './check-in.page';
+import { CheckInPage } from './component/check-in.page';
 
 @NgModule({
   imports: [

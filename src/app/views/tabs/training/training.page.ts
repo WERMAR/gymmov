@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from "../../../shared/auth/services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-training',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainingPage implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthenticationService, private router: Router) {
+  }
 
   ngOnInit() {
+  }
+
+  onLogOut() {
+    this.authService.logOut().then(() => {
+        this.router.navigateByUrl('/auth/tabs/login').then()
+      }
+    );
   }
 
 }

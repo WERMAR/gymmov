@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CheckInPage } from './check-in.page';
+import { CheckInPage } from './component/check-in.page';
 
 const routes: Routes = [
   {
