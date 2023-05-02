@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {LoadingController, ToastController} from "@ionic/angular";
 import {AuthenticationService} from "../../../../shared/auth/services/authentication.service";
+import {UserService} from "../../../../shared/user/services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
   constructor(private router: Router,
               private loadingController: LoadingController,
               private toastController: ToastController,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -32,7 +34,7 @@ export class LoginPage implements OnInit {
           setTimeout(() => {
             if (this.authenticationService.isEmailVerified) {
               loadingElem.dismiss().then(() => {
-                this.router.navigateByUrl('/app/tabs/home').then();
+                this.checkIfUserLoggedInFirstTime();
               })
             } else {
               this.toastController.create({
@@ -70,4 +72,11 @@ export class LoginPage implements OnInit {
   onNoAccountClicked() {
     this.router.navigateByUrl('auth/tabs/register').then(() => console.debug("Navigate to Register Page"));
   }
+
+  private checkIfUserLoggedInFirstTime() {
+    this.userService.loadUserForMail(this.authenticationService.userMail!, () => {
+      this.router.navigateByUrl('/app/tabs/home').then();
+    });
+  }
+
 }

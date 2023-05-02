@@ -2,10 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {RequestedCheckIn} from "../models/requested-check-in.model";
 import {ActionSheetController} from "@ionic/angular";
 import {ButtonActions} from "../../../../shared/util/enums/button-actions.enum";
-import {logIn} from "ionicons/icons";
 import {ArrayFunctions} from "../../../../shared/util/functions/array.functions";
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../../../shared/auth/services/authentication.service";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {OwnCheckIns} from "../models/own-check-ins.model";
+import {CheckIn} from "../models/check-in.model";
+
 
 @Component({
   selector: 'app-check-in',
@@ -15,7 +18,6 @@ import {AuthenticationService} from "../../../../shared/auth/services/authentica
 export class CheckInPage implements OnInit {
 
   requestedCheckIns: RequestedCheckIn[] = [];
-
   actionSheetButtons = [
     {
       text: 'Reject',
@@ -39,11 +41,18 @@ export class CheckInPage implements OnInit {
     }
   ];
 
-  constructor(private actionSheetController: ActionSheetController, private router: Router, private authService: AuthenticationService) {
+  constructor(private actionSheetController: ActionSheetController,
+              private router: Router,
+              private authService: AuthenticationService,
+              private firestore: AngularFirestore) {
   }
 
   ngOnInit() {
-
+    /*this.firestore.collection('check-ins').get().subscribe(res => {
+      res.docs.forEach(doc => {
+        console.log(doc.data())
+      });
+    })*/
   }
 
   onClosedActionSheet(resultOfActionPane: any, checkInRequest: RequestedCheckIn) {
@@ -93,4 +102,20 @@ export class CheckInPage implements OnInit {
       }
     );
   }
+
+  async onCreateDoc() {
+    const data: CheckIn = {
+      userId: this.authService.userId,
+      date: '2023-12-01',
+      location: 'CleverFit Aschaffenburg',
+      confirmedUserId: null,
+      confirmed: false,
+      requestedUserId: '',
+      rejected: false,
+      rejectedReason: null,
+      trainingId: ''
+    }
+    this.firestore.collection('own-check-ins').doc().set(data).then();
+  }
+
 }

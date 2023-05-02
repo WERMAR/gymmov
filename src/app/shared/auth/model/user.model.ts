@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IFirebaseUser {
   uid: string;
   email: string | null;
   displayName: string | null;

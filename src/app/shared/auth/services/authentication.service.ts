@@ -1,10 +1,9 @@
 import {Injectable, NgZone} from "@angular/core";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import * as firebase from 'firebase/app';
 import * as auth from 'firebase/auth';
 import {Router} from "@angular/router";
 import {ToastController} from "@ionic/angular";
-import {IUser} from "../model/user.model";
+import {IFirebaseUser} from "../model/user.model";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 
 
@@ -13,7 +12,7 @@ import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/f
   }
 )
 export class AuthenticationService {
-  userData: IUser | null = null;
+  userData: IFirebaseUser | null = null;
 
   constructor(private angularFireAuth: AngularFireAuth,
               private router: Router,
@@ -63,12 +62,22 @@ export class AuthenticationService {
   }
 
   get isLoggedIn(): boolean {
-    const user: IUser = JSON.parse(localStorage.getItem('user')!);
+    const user: IFirebaseUser = JSON.parse(localStorage.getItem('user')!);
     return user != null && user.emailVerified;
   }
 
+  get userId(): string {
+    const user: IFirebaseUser = JSON.parse(localStorage.getItem('user')!);
+    return user.uid;
+  }
+
+  get userMail(): string | null {
+    const user: IFirebaseUser = JSON.parse(localStorage.getItem('user')!);
+    return user.email;
+  }
+
   get isEmailVerified(): boolean {
-    const user: IUser = JSON.parse(localStorage.getItem('user')!);
+    const user: IFirebaseUser = JSON.parse(localStorage.getItem('user')!);
     return user.emailVerified;
   }
 
@@ -96,7 +105,7 @@ export class AuthenticationService {
     const userRef: AngularFirestoreDocument<any> = this.afStore.doc(
       `users/${user.uid}`
     );
-    const userData: IUser = {
+    const userData: IFirebaseUser = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -115,5 +124,4 @@ export class AuthenticationService {
       this.router.navigateByUrl('/auth/tabs/login').then();
     });
   }
-
 }
