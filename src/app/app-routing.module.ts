@@ -4,6 +4,10 @@ import {AuthenticationGuard} from "./shared/auth/authentication.guard";
 
 const routes: Routes = [
   {
+    path: 'app/firstlogin',
+    loadChildren: () => import('./views/firstlogin/firstlogin.module').then( m => m.FirstloginPageModule)
+  },
+  {
     path: 'app',
     loadChildren: () => import('./views/tabs/tabs.module').then(m => m.TabsPageModule),
     canActivate: [AuthenticationGuard]
