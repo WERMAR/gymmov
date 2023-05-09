@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>firstlogin</ion-title>
+    <ion-title>Before we start...</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,18 +12,23 @@
   </ion-header>
   <ion-grid>
     <ion-row>
+      <ion-col  class="ion-text-center ion-no-padding">
+        <img width="80%" src="assets/checklistAfterRegister.svg" alt="checklist">
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col>
         <ion-text>... do we need some Information´s</ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>
   <hr>
-  <form>
+  <form [formGroup]="userInformationForm">
     <ion-grid>
       <ion-row>
         <ion-col size-sm="12" offset-sm="5" class="ion-text-center ion-no-padding">
           <ion-item style="width: 100%">
-            <ion-input label="First Name" label-placement="floating"
+            <ion-input label="First Name" label-placement="floating" formControlName="firstname"
                        placeholder="Max"></ion-input>
           </ion-item>
         </ion-col>
@@ -31,7 +36,7 @@
       <ion-row>
         <ion-col size-sm="12" offset-sm="5" class="ion-text-center ion-no-padding">
           <ion-item style="width: 100%">
-            <ion-input label="Last Name" type="text" label-placement="floating"
+            <ion-input label="Last Name" type="text" label-placement="floating" formControlName="lastname"
                        placeholder="Mustermann"></ion-input>
           </ion-item>
         </ion-col>
@@ -39,7 +44,7 @@
       <ion-row>
         <ion-col size-sm="6" offset-sm="5" class="ion-text-center ion-no-padding">
           <ion-item style="width: 100%" id="open-weight-picker">
-            <ion-label>Weight: {{weight}} kg</ion-label>
+            <ion-label>Weight: {{userInformationForm.controls['weight'].value}} kg</ion-label>
             <ion-picker
               trigger="open-weight-picker"
               [columns]="pickerWeightColumns"
@@ -50,7 +55,7 @@
         </ion-col>
         <ion-col size-sm="6" offset-sm="5" class="ion-text-center ion-no-padding">
           <ion-item style="width: 100%" id="open-height-picker">
-            <ion-label>Height: {{height}} cm</ion-label>
+            <ion-label>Height: {{userInformationForm.controls['height'].value}} cm</ion-label>
             <ion-picker
               trigger="open-height-picker"
               [columns]="pickerHeightColumns"
@@ -60,9 +65,13 @@
           </ion-item>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col size-sm="6" offset-sm="3" class="ion-text-center ion-padding">
-          <ion-button class="ion-margin-start" expand="block">Login</ion-button>
+      <ion-row class="ion-margin-top">
+        <ion-col size-sm="6" offset-sm="3" class="ion-text-end ion-padding">
+          <ion-button class="ion-margin-start" style="border-radius: 50px" (click)="onClick()" shape="round"
+                      expand="block"
+                      [disabled]="!userInformationForm.valid">Start now!
+            <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

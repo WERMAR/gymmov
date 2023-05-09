@@ -5,7 +5,8 @@ import {Router} from "@angular/router";
 import {ToastController} from "@ionic/angular";
 import {IFirebaseUser} from "../model/user.model";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
-
+import firebase from "firebase/compat/app";
+import Persistence = firebase.auth.Auth.Persistence;
 
 @Injectable({
     providedIn: "root"
@@ -38,7 +39,9 @@ export class AuthenticationService {
   }
 
   login(value: { email: string, password: string }) {
-    return this.angularFireAuth.signInWithEmailAndPassword(value.email, value.password)
+    return this.angularFireAuth.setPersistence(Persistence.LOCAL).then(() => {
+      return this.angularFireAuth.signInWithEmailAndPassword(value.email, value.password)
+    })
   }
 
   sendEmailVerificationMail() {

@@ -3,4 +3,6 @@ export interface IUser {
   mail: string;
   name: string;
   firstName: string;
+  weight: number;
+  height: number;
 }
